@@ -201,7 +201,16 @@
         }
 
         function toggleItem(groupIndex, itemIndex) {
+            // Toggle the checked status of the item
             groups[groupIndex].items[itemIndex].checked = !groups[groupIndex].items[itemIndex].checked;
+        
+            // Separate checked and unchecked items
+            let uncheckedItems = groups[groupIndex].items.filter(item => !item.checked);
+            let checkedItems = groups[groupIndex].items.filter(item => item.checked);
+        
+            // Merge them with unchecked items first
+            groups[groupIndex].items = [...uncheckedItems, ...checkedItems];
+        
             saveGroups();
             renderGroups();
         }
